@@ -44,8 +44,8 @@ public class TareaDAO {
         List<Tarea> tareas = null;
         try {
             tareas = session.createQuery("from Tarea t where t.estado = :estado", Tarea.class)
-                            .setParameter("estado", estado)
-                            .list();
+                             .setParameter("estado", estado)
+                             .list();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

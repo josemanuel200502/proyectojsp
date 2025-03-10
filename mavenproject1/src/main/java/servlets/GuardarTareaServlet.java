@@ -57,14 +57,15 @@ public class GuardarTareaServlet extends HttpServlet {
                 // Crear la nueva tarea
                 Tarea tarea = new Tarea(descripcion, responsable, fechaInicio, fechaFin, estado, proyecto);
 
-                // Guardar la tarea en la base de datos
+                // Guardar la tarea usando el DAO
                 try (Session session = HibernateUtil.getSessionFactory().openSession()) {
                     Transaction transaction = session.beginTransaction();
-                    tareaDAO.save(tarea);  // Método save en el DAO de tarea
+                    tareaDAO.save(tarea);  // Utiliza el DAO para guardar la tarea
                     transaction.commit();  // Confirmar transacción
                     response.sendRedirect("Tareas.jsp?proyectoId=" + proyectoId);  // Redirigir a la lista de tareas
                 } catch (Exception e) {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al guardar la tarea.");
+                    e.printStackTrace();  // Agregar un print stack para mejor depuración
                 }
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Proyecto no encontrado.");

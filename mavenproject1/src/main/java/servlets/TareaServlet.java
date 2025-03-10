@@ -1,7 +1,7 @@
 package servlets;
 
-import DAO.ProyectoDAO;
 import DAO.TareaDAO;
+import DAO.ProyectoDAO;
 import com.mycompany.mavenproject1.Tarea;
 import com.mycompany.mavenproject1.Proyecto;
 
@@ -40,8 +40,8 @@ public class TareaServlet extends HttpServlet {
     // Registrar una nueva tarea
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
+        String responsable = request.getParameter("responsable");
         String fechaInicioStr = request.getParameter("fecha_inicio");
         String fechaFinStr = request.getParameter("fecha_fin");
         String estado = request.getParameter("estado");
@@ -70,7 +70,7 @@ public class TareaServlet extends HttpServlet {
         }
 
         // Crear la nueva tarea
-        Tarea tarea = new Tarea(descripcion, "Responsable", fechaInicio, fechaFin, estado, proyecto);
+        Tarea tarea = new Tarea(descripcion, responsable, fechaInicio, fechaFin, estado, proyecto);
         tareaDAO.save(tarea);
 
         response.sendRedirect("tareas");

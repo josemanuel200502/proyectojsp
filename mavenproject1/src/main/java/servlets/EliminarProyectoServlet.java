@@ -1,14 +1,13 @@
 package servlets;
 
+
+
+
 import DAO.ProyectoDAO;
 import com.mycompany.mavenproject1.Proyecto;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import util.HibernateUtil;
 
 public class EliminarProyectoServlet extends HttpServlet {
 
@@ -30,26 +29,16 @@ public class EliminarProyectoServlet extends HttpServlet {
                 Proyecto proyecto = proyectoDAO.getProyectoById(id);  // Obtén el proyecto por ID
 
                 if (proyecto != null) {
-                    // Inicia una nueva sesión con Hibernate
-                    Session session = HibernateUtil.getSessionFactory().openSession();
-                    Transaction transaction = session.beginTransaction();
-                    
-                    try {
-                        // Elimina el proyecto
-                        proyectoDAO.delete(proyecto);
-                        transaction.commit();  // Confirma la transacción
-                        response.sendRedirect("proyectos");  // Redirige a la lista de proyectos
-                    } catch (Exception e) {
-                        transaction.rollback();  // Si ocurre algún error, revierte la transacción
-                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al eliminar el proyecto.");
-                    } finally {
-                        session.close();  // Cierra la sesión de Hibernate
-                    }
+                    // Elimina el proyecto usando el ProyectoDAO
+                    proyectoDAO.delete(proyecto);  
+                    response.sendRedirect("proyectos");  // Redirige a la lista de proyectos
                 } else {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Proyecto no encontrado.");
                 }
             } catch (NumberFormatException e) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido.");
+            } catch (Exception e) {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al eliminar el proyecto.");
             }
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Falta el parámetro ID.");

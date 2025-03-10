@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+
     <!-- Servlet ProyectoServlet -->
     <servlet>
         <servlet-name>ProyectoServlet</servlet-name>
         <servlet-class>servlets.ProyectoServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>GuardarProyectoServlet</servlet-name>
-        <servlet-class>servlets.GuardarProyecto</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GuardarTarea</servlet-name>
-        <servlet-class>servlets.GuardarTarea</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>ProyectoServlet</servlet-name>
         <url-pattern>/Proyecto</url-pattern>
     </servlet-mapping>
-    <!-- Servlet TareaServlet -->
+
+    <!-- Servlet GuardarProyectoServlet -->
     <servlet>
-        <servlet-name>TareaServlet</servlet-name>
-        <servlet-class>servlets.TareaServlet</servlet-class>
+        <servlet-name>GuardarProyectoServlet</servlet-name>
+        <servlet-class>servlets.GuardarProyectoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TareaServlet</servlet-name>
-        <url-pattern>/Tarea</url-pattern>
+        <servlet-name>GuardarProyectoServlet</servlet-name>
+        <url-pattern>/guardarProyecto</url-pattern>
     </servlet-mapping>
+
+    <!-- Servlet GuardarTareaServlet -->
+    <servlet>
+        <servlet-name>GuardarTareaServlet</servlet-name>
+        <servlet-class>servlets.GuardarTareaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GuardarTareaServlet</servlet-name>
+        <url-pattern>/guardarTarea</url-pattern>
+    </servlet-mapping>
+
     <!-- Servlet EliminarProyectoServlet -->
     <servlet>
         <servlet-name>EliminarProyectoServlet</servlet-name>
@@ -35,6 +40,7 @@
         <servlet-name>EliminarProyectoServlet</servlet-name>
         <url-pattern>/EliminarProyecto</url-pattern>
     </servlet-mapping>
+
     <!-- Servlet EliminarTareaServlet -->
     <servlet>
         <servlet-name>EliminarTareaServlet</servlet-name>
@@ -44,22 +50,17 @@
         <servlet-name>EliminarTareaServlet</servlet-name>
         <url-pattern>/EliminarTarea</url-pattern>
     </servlet-mapping>
+
     <!-- Configuración de sesión -->
-    <servlet-mapping>
-        <servlet-name>GuardarProyectoServlet</servlet-name>
-        <url-pattern>/GuardarProyecto</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GuardarTarea</servlet-name>
-        <url-pattern>/GuardarTarea</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+
     <!-- Página de bienvenida -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
 </web-app>

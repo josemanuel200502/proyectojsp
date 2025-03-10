@@ -1,17 +1,14 @@
 package servlets;
 
 import com.mycompany.mavenproject1.Proyecto;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.HibernateUtil;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet("/guardarProyecto")
 public class GuardarProyectoServlet extends HttpServlet {
 
     @Override
@@ -27,20 +24,23 @@ public class GuardarProyectoServlet extends HttpServlet {
         // Crear un nuevo objeto Proyecto
         Proyecto proyecto = new Proyecto(nombreProyecto, descripcion, fechaInicio, fechaFin, estado);
 
-        // Persistir el proyecto en la base de datos usando Hibernate
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("GestionProyectoPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(proyecto); // Persistir el objeto Proyecto
-        em.getTransaction().commit();
-        em.close();
-
-        // Redirigir al usuario a la página de proyectos después de guardar
-        response.sendRedirect("Proyectos.jsp");
+        // Usar Hibernate para guardar el proyecto
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            try {
+                session.save(proyecto);  // Guardamos el proyecto en la base de datos
+                transaction.commit();  // Confirmamos la transacción
+                response.sendRedirect("Proyectos.jsp");  // Redirige a la página de proyectos
+            } catch (Exception e) {
+                transaction.rollback();  // Si ocurre un error, revertimos la transacción
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al guardar el proyecto.");
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public String getServletInfo() {
-        return "Servlet para guardar nuevos proyectos en la base de datos";
+        return "Servlet para guardar nuevos proyectos en la base de datos usando Hibernate.";
     }
 }

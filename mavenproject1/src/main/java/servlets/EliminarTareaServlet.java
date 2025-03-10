@@ -4,11 +4,11 @@ import DAO.TareaDAO;
 import com.mycompany.mavenproject1.Tarea;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import util.HibernateUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import util.HibernateUtil;
 
 public class EliminarTareaServlet extends HttpServlet {
 
@@ -30,20 +30,20 @@ public class EliminarTareaServlet extends HttpServlet {
                 Tarea tarea = tareaDAO.getTareaById(id);  // Obtén la tarea por ID
 
                 if (tarea != null) {
-                    // Inicia una nueva sesión con Hibernate
-                    Session session = HibernateUtil.getSessionFactory().openSession();
-                    Transaction transaction = session.beginTransaction();
-                    
-                    try {
-                        // Elimina la tarea
-                        tareaDAO.delete(tarea);
-                        transaction.commit();  // Confirma la transacción
-                        response.sendRedirect("tareas");  // Redirige a la lista de tareas
-                    } catch (Exception e) {
-                        transaction.rollback();  // Si ocurre algún error, revierte la transacción
-                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al eliminar la tarea.");
-                    } finally {
-                        session.close();  // Cierra la sesión de Hibernate
+                    // Utiliza try-with-resources para gestionar la sesión de Hibernate
+                    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                        Transaction transaction = session.beginTransaction();
+
+                        try {
+                            // Elimina la tarea
+                            tareaDAO.delete(tarea);
+                            transaction.commit();  // Confirma la transacción
+                            response.sendRedirect("tareas");  // Redirige a la lista de tareas
+                        } catch (Exception e) {
+                            transaction.rollback();  // Si ocurre algún error, revierte la transacción
+                            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al eliminar la tarea.");
+                            e.printStackTrace();
+                        }
                     }
                 } else {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Tarea no encontrada.");
