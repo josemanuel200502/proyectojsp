@@ -19,4 +19,10 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+    
+    // Método para cerrar el SessionFactory cuando ya no es necesario
+    public static void shutdown() {
+        getSessionFactory().close();
+    }
 }
+

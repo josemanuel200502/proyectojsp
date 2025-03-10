@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package servlets;
 
 import DAO.ProyectoDAO;
@@ -52,3 +48,4 @@ public class ProyectoServlet extends HttpServlet {
         response.sendRedirect("proyectos");
     }
 }
+

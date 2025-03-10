@@ -1,22 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
-/**
- *
- * @author Windows
- */
-
 import com.mycompany.mavenproject1.Tarea;
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
-
+import java.util.List;
 
 public class TareaDAO {
+
     // Método para guardar una nueva tarea
     public void save(Tarea tarea) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -33,14 +24,28 @@ public class TareaDAO {
         }
     }
 
-    // Método para obtener todas las tareas de un proyecto
-    public List<Tarea> getTareasByProyecto(Long proyectoId) {
+    // Método para obtener todas las tareas
+    public List<Tarea> getAllTareas() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Tarea> tareas = null;
         try {
-            tareas = session.createQuery("from Tarea t where t.proyecto.id = :proyectoId", Tarea.class)
-                    .setParameter("proyectoId", proyectoId)
-                    .list();
+            tareas = session.createQuery("from Tarea", Tarea.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return tareas;
+    }
+
+    // Método para obtener tareas por estado
+    public List<Tarea> getTareasPorEstado(String estado) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Tarea> tareas = null;
+        try {
+            tareas = session.createQuery("from Tarea t where t.estado = :estado", Tarea.class)
+                            .setParameter("estado", estado)
+                            .list();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -94,5 +99,4 @@ public class TareaDAO {
             session.close();
         }
     }
-
 }

@@ -1,10 +1,13 @@
-util\HibernateUtil.class
-servlets\EliminarServlet.class
 servlets\ProyectoServlet.class
+servlets\EliminarProyectoServlet.class
+servlets\EliminarTareaServlet.class
+com\mycompany\mavenproject1\resources\JakartaEE8Resource.class
+servlets\GuardarProyectoServlet.class
+DAO\ProyectoDAO.class
+util\HibernateUtil.class
+servlets\GuardarTareaServlet.class
 servlets\TareaServlet.class
 com\mycompany\mavenproject1\JakartaRestConfiguration.class
 com\mycompany\mavenproject1\Tarea.class
-com\mycompany\mavenproject1\resources\JakartaEE8Resource.class
 DAO\TareaDAO.class
 com\mycompany\mavenproject1\Proyecto.class
-DAO\ProyectoDAO.class

@@ -9,7 +9,8 @@ package com.mycompany.mavenproject1;
  * @author Windows
  */
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import java.util.Date;
 import java.util.List;
 

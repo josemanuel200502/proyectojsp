@@ -80,42 +80,35 @@
    
 
     <!-- Formulario para agregar tarea -->
+      <!-- Formulario para agregar nuevo proyecto -->
     <div class="container form-container">
         <h2>Agregar Proyecto</h2>
-        <form action="tareas" method="post">
-            <input type="hidden" name="proyectoId" value="${param.proyectoId}">
+        <form action="guardarProyecto" method="post">
+            <div class="mb-3">
+                <label class="form-label">Nombre del Proyecto:</label>
+                <input type="text" class="form-control" name="nombreProyecto" required>
+            </div>
             <div class="mb-3">
                 <label class="form-label">Descripción:</label>
                 <input type="text" class="form-control" name="descripcion" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Responsable:</label>
-                <input type="text" class="form-control" name="responsable" required>
-            </div>
-            <div class="mb-3">
                 <label class="form-label">Fecha de Inicio:</label>
-                <input type="date" class="form-control" name="fecha_inicio" required>
+                <input type="date" class="form-control" name="fechaInicio" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Fecha de Fin:</label>
-                <input type="date" class="form-control" name="fecha_fin" required>
+                <input type="date" class="form-control" name="fechaFin" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Estado:</label>
                 <select class="form-select" name="estado" required>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="en progreso">En Progreso</option>
+                    <option value="en curso">En Curso</option>
                     <option value="completado">Completado</option>
                 </select>
             </div>
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Guardar Tarea</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Guardar Proyecto</button>
         </form>
-    </div>
-
-    <div class="container mt-4 text-center">
-        <a href="Proyectos.jsp" class="btn btn-outline-primary">Volver a Proyectos</a>
     </div>
 
     <!-- Bootstrap JS -->
