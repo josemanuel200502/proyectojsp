@@ -135,7 +135,7 @@
         </form>
 
         <br>
-        <a href="proyectos" class="btn btn-outline-primary">Volver a Proyectos</a>
+            <a href="index.jsp" class="btn btn-outline-primary">Volver a Inicio</a>
     </div>
 
     <!-- Bootstrap JS -->

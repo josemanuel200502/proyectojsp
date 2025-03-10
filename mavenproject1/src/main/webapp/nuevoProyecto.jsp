@@ -81,7 +81,7 @@
 
     <!-- Formulario para agregar tarea -->
     <div class="container form-container">
-        <h2>Agregar Tarea</h2>
+        <h2>Agregar Proyecto</h2>
         <form action="tareas" method="post">
             <input type="hidden" name="proyectoId" value="${param.proyectoId}">
             <div class="mb-3">

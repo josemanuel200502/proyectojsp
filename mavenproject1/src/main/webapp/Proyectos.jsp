@@ -70,7 +70,7 @@
                     <li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="Proyectos.jsp">Proyectos</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tareas.jsp">Tareas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="nuevaTarea.jsp">Nueva Tarea</a></li>
+                    <li class="nav-item"><a class="nav-link" href="NuevaTarea.jsp">Nueva Tarea</a></li>
                     <li class="nav-item"><a class="nav-link" href="nuevoProyecto.jsp">Nuevo Proyecto</a></li>
                 </ul>
             </div>
